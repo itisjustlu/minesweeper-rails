@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20200611200328) do
     t.integer "row"
     t.integer "column"
     t.string "type"
-    t.string "state"
-    t.integer "flagged"
+    t.integer "flag"
+    t.integer "mines_around"
     t.boolean "clicked"
     t.integer "board_id"
     t.datetime "created_at", null: false
