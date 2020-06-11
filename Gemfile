@@ -10,6 +10,9 @@ gem 'sqlite3'
 gem 'puma', '~> 3.7'
 gem 'devise'
 gem 'aasm'
+gem 'jwt'
+gem 'fast_jsonapi'
+gem 'kaminari'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
