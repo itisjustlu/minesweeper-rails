@@ -13,6 +13,7 @@ gem 'aasm'
 gem 'jwt'
 gem 'fast_jsonapi'
 gem 'kaminari'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
