@@ -2,7 +2,7 @@ module Api
   module V1
     class BoardsController < BaseController
       before_action :authenticate_user!
-      before_action :find_board, only: [:show]
+      before_action :find_board, only: [:show, :add_user]
 
       def index
         @boards = current_user.boards.order(id: :desc).page(params[:page]).per(params[:per_page])
@@ -24,6 +24,12 @@ module Api
         render json: serialized_board
       end
 
+      def add_user
+        @user = User.find_by!(email: params[:email])
+        @board.users << @user
+        render status: :ok
+      end
+
       private
 
       def find_board
@@ -36,7 +42,7 @@ module Api
 
       def serialized_board
         BoardSerializer
-          .new(@board)
+          .new(@board, include: [:users])
           .serializable_hash
           .merge(
             cells: @board.cells

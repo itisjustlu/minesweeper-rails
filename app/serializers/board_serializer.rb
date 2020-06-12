@@ -3,4 +3,5 @@ class BoardSerializer
   attributes :id, :rows, :columns, :mines, :finished_at, :state, :created_at
 
   has_many :cells
+  has_many :users
 end

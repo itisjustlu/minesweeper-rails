@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       resources :sessions, only: :create
       resources :registrations, only: :create
       resources :boards do
+        post :add_user, on: :member
+
         resources :cells, only: [] do
           member do
             put :mark
