@@ -11,6 +11,7 @@ class Cell < ApplicationRecord
   }
 
   def click!
+
     return unless can_click?
     update(clicked: true)
     update_adjacents!(adjacents) if mines_around.to_i.zero? && board.playing?
