@@ -21,11 +21,11 @@ class Board < ApplicationRecord
     end
 
     event :win do
-      transitions from: :playing, to: :won
+      transitions from: :playing, to: :won, after: proc { update(finished_at: Time.now) }
     end
 
     event :lose do
-      transitions from: :playing, to: :lost
+      transitions from: :playing, to: :lost, after: proc { update(finished_at: Time.now) }
     end
   end
 

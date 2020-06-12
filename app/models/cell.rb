@@ -13,6 +13,7 @@ class Cell < ApplicationRecord
   def click!
     return unless can_click?
     update(clicked: true)
+    check_game_status!
   end
 
   def mark!
@@ -32,5 +33,10 @@ class Cell < ApplicationRecord
 
   def can_click?
     !clicked?
+  end
+
+  def check_game_status!
+    none_cells = board.cells.where(type: "Cells::None")
+    remaining = none_cells.count none_cells.where(clicked: true).count
   end
 end
