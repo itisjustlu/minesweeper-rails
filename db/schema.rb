@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20200611200328) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "boards", force: :cascade do |t|
     t.string "state"
     t.integer "columns"
@@ -29,15 +32,15 @@ ActiveRecord::Schema.define(version: 20200611200328) do
     t.integer "flag"
     t.integer "mines_around"
     t.boolean "clicked"
-    t.integer "board_id"
+    t.bigint "board_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["board_id"], name: "index_cells_on_board_id"
   end
 
   create_table "user_boards", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "board_id"
+    t.bigint "user_id"
+    t.bigint "board_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["board_id"], name: "index_user_boards_on_board_id"
@@ -61,4 +64,7 @@ ActiveRecord::Schema.define(version: 20200611200328) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "cells", "boards"
+  add_foreign_key "user_boards", "boards"
+  add_foreign_key "user_boards", "users"
 end
