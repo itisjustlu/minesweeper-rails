@@ -7,7 +7,7 @@ module Api
         if @user.save
           render json: UserSerializer.new(@user).serializable_hash.deep_merge(data: {jwt: jwt_token})
         else
-          render json: { data: { errors: @user.errors.full_messages.first } }
+          render json: { data: { errors: @user.errors.full_messages.first } }, status: :unprocessable_entity
         end
       end
 
