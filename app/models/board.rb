@@ -21,15 +21,20 @@ class Board < ApplicationRecord
     end
 
     event :win do
-      transitions from: :playing, to: :won, after: proc { update(finished_at: Time.now) }
+      transitions from: :playing, to: :won, after: proc { game_over! }
     end
 
     event :lose do
-      transitions from: :playing, to: :lost, after: proc { update(finished_at: Time.now) }
+      transitions from: :playing, to: :lost, after: proc { game_over! }
     end
   end
 
   private
+
+  def game_over!
+    update(finished_at: Time.now)
+    cells.update_all(clicked: true)
+  end
 
   def mines_length
     errors.add(:mines, 'cant be greater or equal than total cells') if mines.to_i >= rows.to_i * columns.to_i

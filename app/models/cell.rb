@@ -37,6 +37,7 @@ class Cell < ApplicationRecord
 
   def check_game_status!
     none_cells = board.cells.where(type: "Cells::None")
-    remaining = none_cells.count none_cells.where(clicked: true).count
+    remaining = none_cells.count - none_cells.where(clicked: true).count
+    board.win! if remaining.zero?
   end
 end
