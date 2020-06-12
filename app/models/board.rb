@@ -33,6 +33,7 @@ class Board < ApplicationRecord
 
   def mines_length
     errors.add(:mines, 'cant be greater or equal than total cells') if mines.to_i >= rows.to_i * columns.to_i
+    errors.add(:mines, 'cant be zero') if mines.to_i.zero?
   end
 
   def generate_cells

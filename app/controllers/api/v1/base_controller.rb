@@ -16,7 +16,10 @@ module Api
         rescue
           render json: { data: { message: 'Unauthorized' } }, status: 401
         end
+      end
 
+      def jwt_token
+        JWT.encode({ user_id: @user.id }, secret)
       end
 
       def current_user

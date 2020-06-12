@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       end
 
       resources :sessions, only: :create
+      resources :registrations, only: :create
       resources :boards do
         resources :cells, only: [] do
           member do
