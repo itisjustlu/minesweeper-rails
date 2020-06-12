@@ -7,7 +7,7 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
     context 'when valid credents' do
       it 'returns token' do
         post :create, params: { email: subject.email, password: '123456' }
-        expect(JSON.parse(response.body).dig('data', 'token')).to_not be_nil
+        expect(JSON.parse(response.body).dig('data', 'jwt')).to_not be_nil
       end
 
       it 'returns proper status' do
